@@ -1,0 +1,9 @@
+philo/obj/
+philo/philosphers
+philo/.direnv
+philo/.envrc
+philo/flake.nix
+philo/compile_commands.json
+philo/.cache
+philo/vgcore.*
+
