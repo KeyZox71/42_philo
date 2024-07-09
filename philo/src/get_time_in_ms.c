@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   get_time_in_ms.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:10:29 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/09 13:17:55 by adjoly           ###   ########.fr       */
+/*   Created: 2024/07/09 12:02:24 by adjoly            #+#    #+#             */
+/*   Updated: 2024/07/09 13:14:50 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-#include <stdlib.h>
-#include <stdio.h>
 #include <sys/time.h>
-#include <limits.h>
-#include "utils.h"
+#include <stdint.h>
 
-int	main(int ac, char **av)
+uint16_t	get_time_in_ms(struct timeval t0, struct timeval t1)
 {
-	t_pdata			data;
-	struct timeval	t0;
-	struct timeval	t1;
-
-	gettimeofday(&t0, NULL);
-	data = philo_parse(av, ac);
-	gettimeofday(&t1, NULL);
-	if (data.error == true)
-		return (EXIT_FAILURE);
-	print_philo_data(data);
-	log_philo(get_time_in_ms(t0, t1), 0, DIED);
+	return (((t1.tv_sec-t0.tv_sec) * 1000000 + t1.tv_usec-t0.tv_usec)/1000);
 }

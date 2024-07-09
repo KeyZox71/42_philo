@@ -6,14 +6,14 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:12:20 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/07 17:56:28 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/08 16:22:28 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include "philo_msg.h"
 
-void	log_philo(uint32_t timestamp, uint16_t philo, t_philo_state type)
+void	log_philo(uint32_t timestamp, uint16_t philo, t_pstate type)
 {
 	if (type == EAT)
 		printf("%u %hu %s", timestamp, philo, EATING_MSG);

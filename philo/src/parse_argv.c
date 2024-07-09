@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   parse_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:10:29 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/09 13:17:55 by adjoly           ###   ########.fr       */
+/*   Created: 2024/07/08 15:30:46 by adjoly            #+#    #+#             */
+/*   Updated: 2024/07/09 10:46:47 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/time.h>
-#include <limits.h>
 #include "utils.h"
 
-int	main(int ac, char **av)
+t_pdata	fill_pdata(char **av)
 {
-	t_pdata			data;
-	struct timeval	t0;
-	struct timeval	t1;
+	t_pdata	data;
 
-	gettimeofday(&t0, NULL);
-	data = philo_parse(av, ac);
-	gettimeofday(&t1, NULL);
-	if (data.error == true)
-		return (EXIT_FAILURE);
-	print_philo_data(data);
-	log_philo(get_time_in_ms(t0, t1), 0, DIED);
+	if (!av)
+	{
+		data.error = true;
+		return (data);
+	}
+	data.philo_nbr = ft_atoll(av[1]);
+	data.die_time = ft_atoll(av[2]);
+	data.eat_time = ft_atoll(av[3]);
+	data.sleep_time = ft_atoll(av[4]);
+	if (av[5])
+		data.meal_nbr = ft_atoll(av[5]);
+	data.error = false;
+	return (data);
+}
+
+t_pdata	philo_parse(char **av, int ac)
+{
+	if (!(ac > 4 && ac <= 6))
+		return (fill_pdata(NULL));
+	return (fill_pdata(av));
 }

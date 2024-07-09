@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:10:29 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/09 13:17:55 by adjoly           ###   ########.fr       */
+/*   Created: 2024/07/08 17:29:13 by adjoly            #+#    #+#             */
+/*   Updated: 2024/07/08 17:29:15 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/time.h>
-#include <limits.h>
-#include "utils.h"
-
-int	main(int ac, char **av)
+long long	ft_atoll(const char	*nptr)
 {
-	t_pdata			data;
-	struct timeval	t0;
-	struct timeval	t1;
+	char		sign;
+	long long	nbr;
 
-	gettimeofday(&t0, NULL);
-	data = philo_parse(av, ac);
-	gettimeofday(&t1, NULL);
-	if (data.error == true)
-		return (EXIT_FAILURE);
-	print_philo_data(data);
-	log_philo(get_time_in_ms(t0, t1), 0, DIED);
+	sign = 1;
+	nbr = 0;
+	while ((*nptr >= 7 && *nptr <= 13) || *nptr == 32)
+		nptr++;
+	if (*nptr == '-')
+	{
+		sign *= -1;
+		nptr++;
+	}
+	else if (*nptr == '+')
+		nptr++;
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		nbr = nbr * 10 + (*nptr - '0');
+		nptr++;
+	}
+	return (nbr * sign);
 }
