@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:10:29 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/09 13:17:55 by adjoly           ###   ########.fr       */
+/*   Created: 2024/07/11 14:36:59 by adjoly            #+#    #+#             */
+/*   Updated: 2024/07/17 22:53:48 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/time.h>
-#include <limits.h>
-#include "utils.h"
 
-int	main(int ac, char **av)
+void init_philo(t_pdata data)
 {
-	t_pdata			data;
-	struct timeval	t0;
-	struct timeval	t1;
+	t_philo			philo[PHILO_MAX];
+	t_philo			*tmp;
+	pthread_mutex_t	*print;
+	int				ret;
 
-	gettimeofday(&t0, NULL);
-	data = philo_parse(av, ac);
-	gettimeofday(&t1, NULL);
-	if (data.error == true)
-		return (EXIT_FAILURE);
-	print_philo_data(data);
-	log_philo(get_time_in_ms(t0, t1), 0, DIED);
+	tmp = philo;
+	i = 0;
+	init_fork(philo, data);
+	while (tmp && i < data->philo_nbr)
+	{
+		ret = pthread_create(&(tmp->thread), NULL, philo_routine, tmp);
+		if (ret != 0)
+			return ;
+		tmp->data = data;
+		tmp->state = EAT;
+		tmp++;
+	}
 }

@@ -6,7 +6,7 @@
 #    By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/07 15:08:52 by adjoly            #+#    #+#              #
-#    Updated: 2024/07/07 15:24:47 by adjoly           ###   ########.fr        #
+#    Updated: 2024/07/16 20:03:49 by adjoly           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ CC = cc
 
 OBJSDIR = obj/
 
-SRC = $(shell find src -name '*.c')
+SRC = $(shell find . -name '*.c')
 
-I_DIR = include/
+I_DIR = ./ 
 
 INCLUDE = -I $(I_DIR)
 
