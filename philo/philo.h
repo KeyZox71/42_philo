@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:11:02 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/18 18:30:56 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/21 21:55:26 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,23 @@ typedef struct s_philo
 	t_fork			fork;
 	t_pstate		state;
 	t_pdata			data;
-	pthread_t		thread;
 }	t_philo;
+
+typedef struct s_init
+{
+	pthread_t		thread;
+	t_philo			data;
+}	t_init;
 
 /**
  *	Utils
  */
-void		log_philo(uint32_t timestamp, uint16_t philo, t_pstate type);
+void		log_philo(uint32_t timestamp, t_philo philo);
 t_pdata		philo_parse(char **argv, int ac);
 long long	ft_atoll(const char	*nptr);
 uint16_t	get_time_in_ms(struct timeval t0, struct timeval t1);
 
-void		*philo_routine(void *param)
+void		*philo_routine(void *param);
 /**
  *	Main path
  *	by order of call
