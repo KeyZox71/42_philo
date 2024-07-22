@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:11:02 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/21 21:55:26 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/22 14:01:27 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,11 @@ t_pdata		philo_parse(char **argv, int ac);
 long long	ft_atoll(const char	*nptr);
 uint16_t	get_time_in_ms(struct timeval t0, struct timeval t1);
 
-void		*philo_routine(void *param);
 /**
  *	Main path
  *	by order of call
  */
 t_philo		*init_philo(t_pdata data, uint16_t philo_nbr);
-void		init_fork(t_philo *philo, t_pdata data);
-void		start_philo(t_philo *philo, t_pdata data);
 
 /**
  *	For debug purpose to be REMOVED
