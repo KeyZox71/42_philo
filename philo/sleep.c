@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   sleep.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:10:29 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/23 17:42:16 by adjoly           ###   ########.fr       */
+/*   Created: 2024/07/23 17:15:24 by adjoly            #+#    #+#             */
+/*   Updated: 2024/07/23 17:24:30 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/time.h>
-#include <limits.h>
 
-int	main(int ac, char **av)
+uint32_t	time_to_ms(void)
 {
-	t_pdata			data;
+	struct timeval	time;
 
-	data = philo_parse(av, ac);
-	if (data.error == true)
-		return (EXIT_FAILURE);
-	init_philo(data);
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+void	sleep_phil(uint32_t sleep_time)
+{
+	uint32_t	t0;
+
+	t0 = time_to_ms() + sleep_time;
+	while (time_to_ms() < t0)
+		usleep(100);
 }

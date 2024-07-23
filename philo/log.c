@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:12:20 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/21 21:31:44 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/22 21:21:21 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 #include "philo_msg.h"
 #include <stdio.h>
 
-void	log_philo(uint32_t timestamp, t_philo philo)
+void	log_philo(struct timeval t1, t_philo philo)
 {
+	uint32_t				timestamp;
 	static pthread_mutex_t	print = {0};
 
+	timestamp = get_time_in_ms(philo.t0, t1);
 	pthread_mutex_lock(&print);
 	if (philo.state == EAT)
 		printf("%u %hu %s", timestamp, philo.nbr, EATING_MSG);

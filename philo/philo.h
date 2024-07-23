@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:11:02 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/22 14:01:27 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/23 17:23:38 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdbool.h>
 # include <sys/time.h>
 # include <sys/types.h>
+# include <unistd.h>
 
 # define PHILO_MAX 200
 
@@ -64,16 +65,20 @@ typedef struct s_init
 /**
  *	Utils
  */
-void		log_philo(uint32_t timestamp, t_philo philo);
 t_pdata		philo_parse(char **argv, int ac);
 long long	ft_atoll(const char	*nptr);
 uint16_t	get_time_in_ms(struct timeval t0, struct timeval t1);
+void		log_philo(struct timeval t1, t_philo philo);
+void		sleep_phil(uint32_t sleep_time);
 
 /**
  *	Main path
  *	by order of call
  */
-t_philo		*init_philo(t_pdata data, uint16_t philo_nbr);
+void	init_philo(t_pdata data);
+t_fork	init_fork(t_init *init, uint16_t nbr);
+
+void	*philo_routine(void *content);
 
 /**
  *	For debug purpose to be REMOVED
