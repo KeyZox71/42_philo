@@ -1,0 +1,15 @@
+EAT
+lock left
+lock right
+geteattime 
+print
+sleep time_to_eat ms
+
+SLEEP
+print
+sleep time_to_sleep ms
+
+THINK
+print
+
+REPEAT

@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:11:02 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/23 17:23:38 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/25 00:03:53 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 # include <sys/time.h>
 # include <sys/types.h>
 # include <unistd.h>
+# include <stdio.h>
 
 # define PHILO_MAX 200
 
 typedef enum s_pstate
 {
-	DIED = -1,
+	DEAD = -1,
 	EAT,
 	THINK,
 	SLEEP,
@@ -49,11 +50,12 @@ typedef struct s_fork
 
 typedef struct s_philo
 {
-	uint16_t		nbr;
+	uint16_t		id;
 	struct timeval	t0;
 	t_fork			fork;
 	t_pstate		state;
 	t_pdata			data;
+	pthread_mutex_t	*check;
 }	t_philo;
 
 typedef struct s_init
@@ -68,15 +70,17 @@ typedef struct s_init
 t_pdata		philo_parse(char **argv, int ac);
 long long	ft_atoll(const char	*nptr);
 uint16_t	get_time_in_ms(struct timeval t0, struct timeval t1);
-void		log_philo(struct timeval t1, t_philo philo);
-void		sleep_phil(uint32_t sleep_time);
+void		log_philo(t_philo philo);
+bool		sleep_phil(uint32_t sleep_time, pthread_mutex_t *death);
+bool		get_death(bool in, bool ret);
 
 /**
  *	Main path
  *	by order of call
  */
 void	init_philo(t_pdata data);
-t_fork	init_fork(t_init *init, uint16_t nbr);
+void	init_fork(t_init *init, uint16_t philo_nbr);
+void	start_philo(t_init *init, uint16_t philo_nbr);
 
 void	*philo_routine(void *content);
 
