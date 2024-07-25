@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:24:53 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/25 16:12:00 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/25 16:27:20 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	*philo_routine(void *content)
 
 	philo = *(t_philo *)content;
 	gettimeofday(&(philo.t0), NULL);
+	printf("asdf = %hhu\n", philo.data.meal_nbr);
 	while (i < philo.data.meal_nbr)
 	{
 		philo.state = EAT;
@@ -28,6 +29,8 @@ void	*philo_routine(void *content)
 		pthread_mutex_lock(philo.fork.right);
 		log_philo(philo);
 		death = sleep_phil(philo.data.eat_time, philo.check);
+		pthread_mutex_unlock(&philo.fork.left);
+		pthread_mutex_unlock(philo.fork.right);
 		if (death == true)
 			return (NULL);
 		philo.state = SLEEP;

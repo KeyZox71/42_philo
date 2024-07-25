@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:10:29 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/23 17:42:16 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/25 16:24:01 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ int	main(int ac, char **av)
 	if (data.error == true)
 		return (EXIT_FAILURE);
 	init_philo(data);
+	return (EXIT_SUCCESS);
 }

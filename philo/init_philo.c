@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 14:36:59 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/25 15:14:45 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/25 16:18:55 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void init_philo(t_pdata data)
 
 	i = 0;
 	pthread_mutex_init(&check, NULL);
-	init_fork(init, init[0].data.data.philo_nbr);
+	init_fork(init, data.philo_nbr);
 	while (i < data.philo_nbr)
 	{
 		init[i].data.id = i;

@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 18:19:14 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/24 23:01:29 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/25 16:28:27 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	start_philo(t_init *init, uint16_t philo_nbr)
 		r = pthread_join(init[i].thread, NULL);
 		if (r != 0)
 			return ;
+		usleep(500);
 		i++;
 	}
 }
