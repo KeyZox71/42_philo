@@ -6,12 +6,25 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:24:53 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/25 16:27:20 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:06:20 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
+
+
+void take_fork(t_fork *fork, int id)
+{
+	if (id % 2)
+	{
+		pthread_mutex_lock(&fork->left);
+	}
+	else
+	{
+		pthread_mutex_lock(fork->right);
+	}
+}
 
 void	*philo_routine(void *content)
 {
@@ -21,12 +34,15 @@ void	*philo_routine(void *content)
 
 	philo = *(t_philo *)content;
 	gettimeofday(&(philo.t0), NULL);
-	printf("asdf = %hhu\n", philo.data.meal_nbr);
 	while (i < philo.data.meal_nbr)
 	{
+		log_philo(philo);
+		take_fork(&philo.fork, philo.id);
+		philo.state = FORK_TAKEN;
+		log_philo(philo);
+		take_fork(&philo.fork, philo.id + 1);
+		log_philo(philo);
 		philo.state = EAT;
-		pthread_mutex_lock(&philo.fork.left);
-		pthread_mutex_lock(philo.fork.right);
 		log_philo(philo);
 		death = sleep_phil(philo.data.eat_time, philo.check);
 		pthread_mutex_unlock(&philo.fork.left);
