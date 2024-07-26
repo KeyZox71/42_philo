@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:24:53 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/25 20:06:20 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/26 15:15:13 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,18 @@ void	*philo_routine(void *content)
 	gettimeofday(&(philo.t0), NULL);
 	while (i < philo.data.meal_nbr)
 	{
-		log_philo(philo);
-		take_fork(&philo.fork, philo.id);
 		philo.state = FORK_TAKEN;
+		take_fork(&philo.fork, philo.id);
 		log_philo(philo);
 		take_fork(&philo.fork, philo.id + 1);
 		log_philo(philo);
 		philo.state = EAT;
 		log_philo(philo);
 		death = sleep_phil(philo.data.eat_time, philo.check);
-		pthread_mutex_unlock(&philo.fork.left);
+		if (death == true)
+			return (NULL);
 		pthread_mutex_unlock(philo.fork.right);
-		if (death == true)
-			return (NULL);
-		philo.state = SLEEP;
-		log_philo(philo);
-		death = sleep_phil(philo.data.sleep_time, philo.check);
-		if (death == true)
-			return (NULL);
-		philo.state = THINK;
-		log_philo(philo);
+		pthread_mutex_unlock(&philo.fork.left);
 		i++;
 	}
 	return (NULL);

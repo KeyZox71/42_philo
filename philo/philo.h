@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:11:02 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/25 17:06:09 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/26 15:25:57 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ bool		get_death(bool in, bool ret);
  *	Main path
  *	by order of call
  */
-void	init_philo(t_pdata data);
-t_init	*init_fork(t_init *init, uint16_t philo_nbr);
-void	start_philo(t_init *init, uint16_t philo_nbr);
+void		init_fork(t_pdata data);
+void		init_philo(t_pdata data, t_init *init);
+void		start_philo(t_init *init, uint16_t philo_nbr);
 
-void	*philo_routine(void *content);
+void		*philo_routine(void *content);
 
 /**
  *	For debug purpose to be REMOVED
