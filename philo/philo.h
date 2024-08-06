@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:11:02 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/31 21:55:13 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/06 19:22:09 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,15 @@ typedef struct s_philo
 /**
  *	Utils
  */
-t_pdata		philo_parse(char **argv, int ac);
+size_t		ft_strlen(char *s);
+uint16_t	get_meal_nb(uint16_t meal_nbr, bool no_meal);
+bool		get_death(bool in, bool ret);
 long long	ft_atoll(const char	*nptr);
 uint32_t	get_time_in_ms(struct timeval t0, struct timeval t1);
-void		log_philo(t_philo philo);
-bool		get_death(bool in, bool ret);
-bool		sleep_phil(t_philo philo);
-uint16_t	get_meal_nb(uint16_t meal_nbr, bool no_meal);
 
+void		log_philo(t_philo philo);
+bool		sleep_phil(t_philo *philo);
+t_pdata		philo_parse(char **argv, int ac);
 /**
  *	Main path
  *	by order of call

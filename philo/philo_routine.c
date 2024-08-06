@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:24:53 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/31 22:10:31 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/06 18:55:55 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,46 @@ void	*philo_routine(void *content)
 	philo->meal_left = get_meal_nb(philo->data.meal_nbr, philo->data.no_meal);
 	while (1)
 	{
-		if (eat(philo) == true)
-			break ;
-		// unlock pas les fourchet si po la
-		pthread_mutex_unlock(&philo->fork.left);
-		pthread_mutex_unlock(philo->fork.right);
-		if (philo->data.no_meal == false)
-			philo->meal_left--;
-		philo->state = SLEEP;
-		log_philo(*philo);
-		death = sleep_phil(*philo);
+		philo->state = FORK_TAKEN;
+		take_fork(&philo->fork, philo->id);
+		pthread_mutex_lock(philo->check);
+		death = get_death(false, true);
+		pthread_mutex_unlock(philo->check);
 		if (death == true)
 			break ;
-		if (!philo->meal_left)
+		log_philo(*philo);
+		if (&(philo->fork.left) == philo->fork.right)
+		{
+			philo->state = DEAD;
+			sleep_phil(philo);
+			log_philo(*philo);
 			return (NULL);
+		}
+		take_fork(&philo->fork, philo->id + 1);
+		pthread_mutex_lock(philo->check);
+		death = get_death(false, true);
+		pthread_mutex_unlock(philo->check);
+		if (death == true)
+			break ;
+		log_philo(*philo);
+		philo->state = EAT;
+		gettimeofday(&(philo->eat), NULL);
+		log_philo(*philo);
+		if (sleep_phil(philo) == true)
+			break ;
+		pthread_mutex_unlock(&philo->fork.left);
+		pthread_mutex_unlock(philo->fork.right);
+		philo->meal_left--;
+		philo->state = SLEEP;
+		log_philo(*philo);
+		sleep_phil(philo);
 		philo->state = THINK;
 		log_philo(*philo);
+		if (philo->meal_left == 0)
+			return (NULL);
 	}
+	pthread_mutex_unlock(&philo->fork.left);
+	pthread_mutex_unlock(philo->fork.right);
 	philo->state = DEAD;
 	log_philo(*philo);
 	return (NULL);
