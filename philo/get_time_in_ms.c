@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:02:24 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/24 23:51:20 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/07/31 20:35:51 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdint.h>
 #include "philo.h"
 
-uint16_t	get_time_in_ms(struct timeval t0, struct timeval t1)
+uint32_t	get_time_in_ms(struct timeval t0, struct timeval t1)
 {
 	return (((t1.tv_sec - t0.tv_sec) * 1000000 + \
 			t1.tv_usec - t0.tv_usec) / 1000);

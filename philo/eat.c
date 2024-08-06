@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_philo.c                                      :+:      :+:    :+:   */
+/*   eat.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 18:19:14 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/25 16:46:57 by adjoly           ###   ########.fr       */
+/*   Created: 2024/07/30 02:29:39 by adjoly            #+#    #+#             */
+/*   Updated: 2024/07/31 21:53:13 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	start_philo(t_init *init, uint16_t philo_nbr)
+bool	eat(t_philo *philo)
 {
-	uint16_t	i;
-	int			r;
+	bool	death;
 
-	i = 0;
-	while (i < philo_nbr)
-	{
-		r = pthread_join(init[i].thread, NULL);
-		if (r != 0)
-			return ;
-		i++;
-	}
+	philo->state = FORK_TAKEN;
+	take_fork(&philo->fork, philo->id);
+	log_philo(*philo);
+	if (&(philo->fork.left) == philo->fork.right)
+		return (true);
+	take_fork(&philo->fork, philo->id + 1);
+	log_philo(*philo);
+	philo->state = EAT;
+	gettimeofday(&(philo->eat), NULL);
+	log_philo(*philo);
+	death = sleep_phil(*philo);
+	return (death);
 }

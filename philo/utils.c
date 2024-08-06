@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_fork.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 15:29:08 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/31 17:40:57 by adjoly           ###   ########.fr       */
+/*   Created: 2024/07/31 21:20:49 by adjoly            #+#    #+#             */
+/*   Updated: 2024/07/31 21:55:16 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdlib.h>
 
-void	init_fork(t_pdata data)
+uint16_t	get_meal_nb(uint16_t meal_nbr, bool no_meal)
 {
-	uint8_t	i;
-	t_philo	philo[PHILO_MAX];
-
-	i = 0;
-	while (i < data.philo_nbr)
-	{
-		pthread_mutex_init(&(philo[i].fork.left), NULL);
-		philo[i].fork.right = &philo[(i + 1) % data.philo_nbr].fork.left;
-		i++;
-	}
-	init_philo(data, philo);
+	if (no_meal == true)
+		return (1);
+	else
+		return (meal_nbr);
 }

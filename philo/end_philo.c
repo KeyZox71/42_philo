@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_fork.c                                        :+:      :+:    :+:   */
+/*   end_philo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 15:29:08 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/31 17:40:57 by adjoly           ###   ########.fr       */
+/*   Created: 2024/07/24 18:19:14 by adjoly            #+#    #+#             */
+/*   Updated: 2024/07/26 16:50:54 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdlib.h>
 
-void	init_fork(t_pdata data)
+void	end_philo(pthread_t *thread, uint16_t philo_nbr)
 {
-	uint8_t	i;
-	t_philo	philo[PHILO_MAX];
+	uint16_t	i;
+	int			r;
 
 	i = 0;
-	while (i < data.philo_nbr)
+	while (i < philo_nbr)
 	{
-		pthread_mutex_init(&(philo[i].fork.left), NULL);
-		philo[i].fork.right = &philo[(i + 1) % data.philo_nbr].fork.left;
+		r = pthread_join(thread[i], NULL);
+		if (r != 0)
+			return ;
 		i++;
 	}
-	init_philo(data, philo);
 }
