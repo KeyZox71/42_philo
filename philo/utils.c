@@ -6,26 +6,42 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 21:20:49 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/06 19:16:42 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/08 18:17:09 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-uint16_t	get_meal_nb(uint16_t meal_nbr, bool no_meal)
-{
-	if (no_meal == true)
-		return (1);
-	else
-		return (meal_nbr);
-}
 
 size_t	ft_strlen(char *s)
 {
 	char	*tmp;
 
 	tmp = s;
-	while(*tmp)
+	while (*tmp)
 		tmp++;
 	return (tmp - s);
+}
+
+long long	ft_atoll(const char	*nptr)
+{
+	char		sign;
+	long long	nbr;
+
+	sign = 1;
+	nbr = 0;
+	while ((*nptr >= 7 && *nptr <= 13) || *nptr == 32)
+		nptr++;
+	if (*nptr == '-')
+	{
+		sign *= -1;
+		nptr++;
+	}
+	else if (*nptr == '+')
+		nptr++;
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		nbr = nbr * 10 + (*nptr - '0');
+		nptr++;
+	}
+	return (nbr * sign);
 }

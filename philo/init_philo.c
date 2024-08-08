@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 14:36:59 by adjoly            #+#    #+#             */
-/*   Updated: 2024/07/31 19:00:58 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/08 18:07:47 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	init_philo(t_pdata data, t_philo *philo)
 
 	i = 0;
 	pthread_mutex_init(&check, NULL);
-	get_death(false, false);
+	philo[i].check = &check;
+	get_death(false, false, philo);
 	gettimeofday(&time, NULL);
 	while (i < data.philo_nbr)
 	{

@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:30:46 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/06 19:48:54 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/08 17:26:05 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ bool	check_av(char **av)
 		return (print_err(4));
 	return (false);
 }
-
 
 t_pdata	ret_err(t_pdata data, uint8_t error)
 {
