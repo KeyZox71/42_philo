@@ -6,35 +6,20 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:30:46 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/08 17:26:05 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/12 19:39:43 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include "philo_msg.h"
 
-bool	print_err(uint8_t error)
-{
-	if (error == 0)
-		printf(ERR_MAX_PHIL);
-	else if (error == 1)
-		printf(ERR_MAX_DIE_TIME);
-	else if (error == 2)
-		printf(ERR_MAX_EAT_TIME);
-	else if (error == 3)
-		printf(ERR_MAX_SLEEP_TIME);
-	else if (error == 4)
-		printf(ERR_MAX_MEAL);
-	else if (error == 5)
-		printf(ERR_NB_ARG);
-	return (true);
-}
+bool	print_err(uint8_t error);
 
 bool	check_av(char **av)
 {
 	if (!av)
 		return (print_err(5));
-	if (ft_strlen(av[0]) > 3)
+	if (ft_strlen(av[0]) > 3 || ft_atoll(av[0]) > 200)
 		return (print_err(0));
 	if (ft_strlen(av[1]) > 11)
 		return (print_err(1));
@@ -54,12 +39,27 @@ t_pdata	ret_err(t_pdata data, uint8_t error)
 	return (data);
 }
 
+t_pdata	meal_nb(char **av, t_pdata data)
+{
+	if (av[4])
+	{
+		data.meal_nbr = ft_atoll(av[4]);
+		if (data.meal_nbr > 1000)
+			return (ret_err(data, 4));
+		data.no_meal = false;
+	}
+	else
+		data.no_meal = true;
+	return (data);
+}
+
+
 t_pdata	fill_pdata(char **av)
 {
 	t_pdata	data;
 
 	data.philo_nbr = 0;
-	if (!av && check_av(av))
+	if (!av || check_av(av))
 		return (ret_err(data, 255));
 	data.philo_nbr = ft_atoll(av[0]);
 	if (data.philo_nbr > 200)
@@ -73,12 +73,7 @@ t_pdata	fill_pdata(char **av)
 	data.sleep_time = ft_atoll(av[3]);
 	if (data.sleep_time > 2147483647)
 		return (ret_err(data, 3));
-	if (av[4])
-	{
-		data.meal_nbr = ft_atoll(av[4]);
-		if (data.meal_nbr > 1000)
-			return (ret_err(data, 4));
-	}
+	data = meal_nb(av, data);
 	data.error = false;
 	return (data);
 }

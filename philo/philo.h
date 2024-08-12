@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:11:02 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/08 18:12:39 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/12 19:04:16 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,43 +58,44 @@ typedef struct s_philo
 	t_fork			fork;
 	t_pstate		state;
 	t_pdata			data;
+	bool			*death;
 	pthread_mutex_t	*check;
 }	t_philo;
 
+typedef enum	s_bool_death
+{
+	RETURN = -1,
+	FALSE,
+	TRUE
+}	t_bool_death;
+
 /**
- *	Utils
+ * Parsing
  */
 size_t		ft_strlen(char *s);
-uint16_t	get_meal_nb(uint16_t meal_nbr, bool no_meal);
-bool		get_death(bool in, bool ret, t_philo *philo);
+t_pdata		philo_parse(char **av, int ac);
 long long	ft_atoll(const char	*nptr);
-uint32_t	get_time_in_ms(struct timeval t0, struct timeval t1);
-uint32_t	get_current_time(void);
 
-void		log_philo(t_philo *philo);
-bool		sleep_phil(t_philo *philo);
-t_pdata		philo_parse(char **argv, int ac);
+uint32_t	get_time_in_ms(struct timeval t0, struct timeval t1);
 bool		print_death(t_philo *philo);
-bool		philo_eat(t_philo *philo);
+bool		get_death(t_philo *philo, t_bool_death set);
+
 /**
  *	Main path
  *	by order of call
  */
 void		init_fork(t_pdata data);
 void		init_philo(t_pdata data, t_philo *philo);
+void		monitor(t_philo *philo, t_pdata data);
 void		end_philo(pthread_t *thread, uint16_t philo_nbr);
-
-void		*philo_routine(void *content);
 
 /**
  *	Routine func
  */
-void		take_fork(t_fork *fork, int id);
-bool		eat(t_philo *philo);
+void		*philo_routine(void *content);
 
-/**
- *	For debug purpose to be REMOVED
- */
-void		print_philo_data(t_pdata data);
+bool		philo_eat(t_philo *philo);
+void		log_philo(t_philo *philo);
+bool		sleep_phil(t_philo *philo);
 
 #endif
