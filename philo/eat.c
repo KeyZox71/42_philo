@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:29:51 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/12 20:50:55 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/12 21:04:57 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,21 @@ void	take_fork(t_fork *fork, int id)
 bool	philo_eat(t_philo *philo)
 {
 	philo->state = FORK_TAKEN;
-	take_fork(&philo->fork, philo->id);
 	if (get_death(philo, RETURN))
 		return (true);
+	take_fork(&philo->fork, philo->id);
 	log_philo(philo);
 	if (&(philo->fork.left) == philo->fork.right)
 		return (print_death(philo));
+	if (get_death(philo, RETURN))
+		return (true);
 	take_fork(&philo->fork, philo->id + 1);
-//	if (get_death(philo, RETURN))
-//		return (true);
 	log_philo(philo);
 	philo->state = EAT;
 	log_philo(philo);
+	pthread_mutex_lock(philo->check);
 	gettimeofday(&philo->eat, NULL);
+	pthread_mutex_unlock(philo->check);
 	if (sleep_phil(philo) == true)
 		return (true);
 	pthread_mutex_unlock(&philo->fork.left);
