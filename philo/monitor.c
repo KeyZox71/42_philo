@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:13:35 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/12 21:00:27 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/13 10:46:19 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	philo_check(t_philo *philo, t_pdata data)
 
 		gettimeofday(&t1, NULL);
 		pthread_mutex_lock(philo->check);
-		if (get_time_in_ms(philo[i].eat, t1) > data.die_time)
+		if (get_time_in_ms(philo[i].eat, t1) > data.die_time + 1)
 		{
 			pthread_mutex_unlock(philo->check);
 			pthread_mutex_unlock(&philo[i].fork.left);
