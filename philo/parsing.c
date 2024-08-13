@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:30:46 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/12 19:39:43 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/13 10:32:25 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "philo_msg.h"
 
 bool	print_err(uint8_t error);
+bool	check_args(char **av);
 
 bool	check_av(char **av)
 {
@@ -85,5 +86,7 @@ t_pdata	philo_parse(char **av, int ac)
 	data.philo_nbr = 0;
 	if (!(ac > 4 && ac <= 6))
 		return (ret_err(data, 5));
+	if (check_args(av))
+		return (ret_err(data, 6));
 	return (fill_pdata(av));
 }

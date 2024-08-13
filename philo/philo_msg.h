@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:50:46 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/12 17:32:08 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/13 10:19:13 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 # define ERR_MAX_SLEEP_TIME "Time to sleep too long < INT_MAX\n" // err 3
 # define ERR_MAX_MEAL "Too much meal < 1000\n" // err 4
 # define ERR_NB_ARG "Invalid number of args need to be 4 or 5\n" // err 5
+# define ERR_ARG "Invalid argument\n"
 
 #endif

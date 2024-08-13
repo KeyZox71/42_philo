@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:12:20 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/12 19:38:58 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/13 10:22:30 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ bool	print_err(uint8_t error)
 		printf(ERR_MAX_MEAL);
 	else if (error == 5)
 		printf(ERR_NB_ARG);
+	else if (error == 6)
+		printf(ERR_ARG);
 	return (true);
 }
 
