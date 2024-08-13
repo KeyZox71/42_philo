@@ -6,7 +6,7 @@
 #    By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/07 15:08:52 by adjoly            #+#    #+#              #
-#    Updated: 2024/07/16 20:03:49 by adjoly           ###   ########.fr        #
+#    Updated: 2024/08/13 10:42:58 by adjoly           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,16 @@ CC = cc
 
 OBJSDIR = obj/
 
-SRC = $(shell find . -name '*.c')
+SRC = ./philo.c \
+		./usleep.c \
+		./monitor.c \
+		./eat.c \
+		./parsing.c \
+		./log.c \
+		./util.c \
+		./philo_routine.c \
+		./run_philo.c \
+		./parsing2.c
 
 I_DIR = ./ 
 
