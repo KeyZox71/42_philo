@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:11:02 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/12 19:04:16 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/20 15:44:09 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_philo
 	pthread_mutex_t	*check;
 }	t_philo;
 
-typedef enum	s_bool_death
+typedef enum s_bool_death
 {
 	RETURN = -1,
 	FALSE,

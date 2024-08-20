@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:30:46 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/13 10:32:25 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/20 15:44:22 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_pdata	meal_nb(char **av, t_pdata data)
 		data.no_meal = true;
 	return (data);
 }
-
 
 t_pdata	fill_pdata(char **av)
 {
