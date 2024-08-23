@@ -6,7 +6,7 @@
 /*   By: adjoly <adjoly@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:29:51 by adjoly            #+#    #+#             */
-/*   Updated: 2024/08/12 21:04:57 by adjoly           ###   ########.fr       */
+/*   Updated: 2024/08/23 15:35:29 by adjoly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ bool	philo_eat(t_philo *philo)
 		return (true);
 	pthread_mutex_unlock(&philo->fork.left);
 	pthread_mutex_unlock(philo->fork.right);
+	pthread_mutex_lock(philo->check);
 	if (philo->data.no_meal == false && philo->meal_left > 0)
 		philo->meal_left--;
+	pthread_mutex_unlock(philo->check);
 	return (false);
 }
